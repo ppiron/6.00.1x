@@ -232,7 +232,8 @@ def playHand(hand, wordList, n):
     points = 0
     
     while calculateHandlen(hand) > 0:
-        print "Current Hand:", displayHand(hand)
+        print "Current Hand:", 
+        displayHand(hand)
         word = raw_input('Enter word, or a "." to indicate that you are finished: ')
         if word == ".":
             break

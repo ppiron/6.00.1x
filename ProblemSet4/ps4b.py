@@ -1,4 +1,4 @@
-from ps4a import *
+from ps4a_pp import *
 import time
 
 
@@ -23,6 +23,18 @@ def compChooseWord(hand, wordList, n):
 
     returns: string or None
     """
+    
+    maxScore = 0
+    bestWord = None
+    
+    for word in wordList:
+        if isValidWord(word, hand, wordList):
+            score = getWordScore(word, n)
+            if score > maxScore:
+                maxScore = score
+                bestWord = word
+    return bestWord                
+    
     # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Create a new variable to store the maximum score seen so far (initially 0)
 
@@ -65,7 +77,21 @@ def compPlayHand(hand, wordList, n):
     wordList: list (string)
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    points = 0
+    
+    while calculateHandlen(hand) > 0:
+        print "Current Hand:", 
+        displayHand(hand),
+        word = compChooseWord(hand, wordList, n)
+        if word == None:
+            break
+        else: 
+            wpoint = getWordScore(word, n)
+            points = points + wpoint
+            print '"%s" earned %d points. Total: %d points' % (word, wpoint, points)
+            print
+            hand = updateHand(hand, word)
+    print "Total score: %d points." % points
     
 #
 # Problem #8: Playing a game
